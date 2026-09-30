@@ -10,7 +10,7 @@ if errorlevel 1 (
  pause
  exit /b 1
 )
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%worker%" -InstallDir "%~dp0" %*
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%worker%" -InstallDir "%~dp0." %*
 set "result=%errorlevel%"
 del /Q "%worker%" >NUL 2>&1
 echo.
