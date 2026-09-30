@@ -27,3 +27,10 @@ Die Excel-Dateien werden **nicht hochgeladen**. Ausschließlich die Anwendung is
 ## Weiterentwicklung
 
 Der vollständig lesbare JavaScript-Quelltext steht direkt in `app.js`; das Dashboard benötigt keinen Build-Schritt und kann offline mit lokal bereitgestelltem Excel-Parser betrieben werden. Änderungen an der Analyse- oder Speicherlogik erfolgen direkt in `app.js`.
+
+
+### Baugruppenfilter und CSV (Version 2.2)
+
+- Das Suchfeld in der **Armaturenliste** sucht ausschließlich nach **Baugruppennummern**. Die aufklappbare Liste enthält alle Baugruppen des ausgewählten Schiffs. Beim Auswählen synchronisiert sich auch die Baugruppenauswahl oberhalb der Diagramme. Die Eingabe von Teilnummern filtert die Liste sofort.
+- **Download gefiltert** exportiert genau die Treffer gemäß Schiff, Baugruppe/Baugruppensuche, Prüfkategorie und Statusfilter. Auch Treffer oberhalb der auf dem Bildschirm angezeigten ersten 500 Zeilen sind enthalten.
+- **Download alle** exportiert alle fehlerhaften Armaturen für das ausgewählte Schiff und die gewählte Prüfkategorie, unabhängig von Baugruppen- und Tabellenfilter. Bei „Alle Schiffe“ umfasst er alle Schiffe.
