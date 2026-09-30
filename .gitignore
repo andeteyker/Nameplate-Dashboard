@@ -9,3 +9,8 @@ xlsx.full.min.js
 __pycache__/
 node_modules/
 .DS_Store
+
+# Lokaler Update-Status, Sicherungen und temporaere Installationsdateien
+.nameplate-version
+update-backups/
+.nameplate-pending-*
