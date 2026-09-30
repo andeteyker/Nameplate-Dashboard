@@ -34,3 +34,21 @@ Der vollständig lesbare JavaScript-Quelltext steht direkt in `app.js`; das Dash
 - Das Suchfeld in der **Armaturenliste** sucht ausschließlich nach **Baugruppennummern**. Die aufklappbare Liste enthält alle Baugruppen des ausgewählten Schiffs. Beim Auswählen synchronisiert sich auch die Baugruppenauswahl oberhalb der Diagramme. Die Eingabe von Teilnummern filtert die Liste sofort.
 - **Download gefiltert** exportiert genau die Treffer gemäß Schiff, Baugruppe/Baugruppensuche, Prüfkategorie und Statusfilter. Auch Treffer oberhalb der auf dem Bildschirm angezeigten ersten 500 Zeilen sind enthalten.
 - **Download alle** exportiert alle fehlerhaften Armaturen für das ausgewählte Schiff und die gewählte Prüfkategorie, unabhängig von Baugruppen- und Tabellenfilter. Bei „Alle Schiffe“ umfasst er alle Schiffe.
+
+
+## Automatischer Updater (Windows)
+
+Ab jetzt genügt **`Update-Dashboard.bat`** im Programmordner. Das Skript prüft über HTTPS, ob auf dem offiziellen GitHub-Repository `andeteyker/Nameplate-Dashboard` eine neuere Version von `main` verfügbar ist, zeigt den Commit-Stand und fragt vor der Installation nach. **Keine Administratorrechte erforderlich.**
+
+1. Wenn das Dashboard geöffnet ist, den Browser schließen und idealerweise das laufende Serverfenster mit `Strg+C` beenden.
+2. `Update-Dashboard.bat` im bestehenden Programmordner doppelklicken.
+3. Die Versionsanzeige prüfen und die Installation mit `J` bestätigen.
+4. Danach `Start-Dashboard.bat` starten, Browser ggf. mit `Strg+F5` neu laden.
+
+Für eine reine Update-Prüfung ohne Installation: `Update-Dashboard.bat -CheckOnly`. Bei einem Git-Klon verwendet der Updater `git fetch` und `git merge --ff-only`; bei einer ZIP-Installation lädt er den von GitHub bestätigten **konkreten Commit** herunter, validiert die benötigten Programmdateien, legt eine Sicherung unter `update-backups/` an und aktualisiert nur die Dateien der Anwendung. Bei Kopierfehlern versucht er, den vorherigen Stand wiederherzustellen.
+
+**Deine Daten bleiben erhalten:** Excel-/CSV-Dateien, die separat bereitgestellte `xlsx.full.min.js` und die gespeicherten Browser-Verzeichnishandles (gleiche Adresse `http://localhost:8765/` und dasselbe Browserprofil vorausgesetzt) werden nicht ersetzt oder gelöscht. Lokale Änderungen an Programmdateien eines ZIP-Downloads werden vor dem Ersetzen in `update-backups/` gesichert; bei Git-Klonen bricht der Updater bei ungesicherten Änderungen ab. Für Updates ist eine Internetverbindung zu `api.github.com` und `codeload.github.com` bzw. beim Git-Klon Zugriff auf das Git-Remote notwendig.
+
+**Erste Installation bei bereits heruntergeladener älterer Version:** Einfach die beiden Dateien `Update-Dashboard.bat` und `Update-Dashboard.ps1` aus diesem Repository in den bisherigen Programmordner kopieren und einmalig starten. Der Versionsstand wird danach in der lokalen, nicht veröffentlichten Datei `.nameplate-version` gespeichert.
+
+**Hinweis:** Der Browser kann aus Sicherheitsgründen auch nach einem Programmupdate beim nächsten Öffnen wieder nach dem Ordnerzugriff fragen. Das lässt sich durch den Updater nicht umgehen.
