@@ -1,0 +1,11 @@
+# Keine geschützten Berichtsdaten ins öffentliche Repository
+*.xls
+*.xlsx
+*.xlsm
+*.xlsb
+*.csv
+*DiagramCheck*.html
+xlsx.full.min.js
+__pycache__/
+node_modules/
+.DS_Store
