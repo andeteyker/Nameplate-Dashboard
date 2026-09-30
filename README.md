@@ -23,3 +23,13 @@ Es werden die gespeicherten Verzeichnishandles, Filter und ein zuletzt berechnet
 Die Excel-Dateien werden **nicht hochgeladen**. Ausschließlich die Anwendung ist öffentlich; echte Schiffsberichte, Datenexporte und die Excel-Parser-Bibliothek sind über `.gitignore` ausgeschlossen. Im lokalen Browserprofil wird auch der letzte analysierte Stand mit Armaturennummern und Objektpfaden gespeichert. Zum Löschen die Website-Daten für localhost:8765 entfernen.
 
 **Datenannahme:** `DiagramCheck_768.xls` wird vorläufig als „Baugruppe 768“ interpretiert. Diese Zuordnung und weitere Dateivarianten sollten noch anhand realer Originalberichte validiert werden.
+
+## Quelltext und Entwicklung
+
+Der vollständige JavaScript-Quelltext liegt für die browserbasierte Bereitstellung verlustfrei als sechs gzip-/Base64-Dateien unter `src/app.part*.b64` vor. `app.js` enthält den selbstständigen Browser-Loader. Für lesbaren, veränderbaren Quelltext genügt ohne Zusatzpakete:
+
+```powershell
+python tools/rebuild_app.py
+```
+
+Dadurch entsteht `app.source.js`. Mit `python tools/rebuild_app.py --replace-app` wird die gebündelte Startdatei durch den lesbaren Originalquelltext ersetzt. Die Integrität wird mit SHA-256 geprüft. Im separat bereitgestellten Windows-Paket liegt der Quelltext direkt als lesbare `app.js` vor.
