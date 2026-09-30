@@ -1,0 +1,27 @@
+name: Publish readable dashboard source
+on:
+  push:
+    paths:
+      - ".github/workflows/restore-source.yml"
+      - "src/app.part*.b64"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  restore-source:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out project
+        uses: actions/checkout@v4
+      - name: Restore and verify JavaScript
+        run: python tools/rebuild_app.py
+      - name: Commit readable app.source.js if changed
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app.source.js
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish verified readable dashboard JavaScript"
+            git push
+          fi
